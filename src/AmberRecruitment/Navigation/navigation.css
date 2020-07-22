@@ -1,0 +1,15 @@
+nav .btn-default {
+  background-color: #3f51b5 !important;
+  width: 137px;
+}
+nav .w-100 {
+  width: 29% !important;
+}
+
+@media (max-width: 767px) {
+  nav .navbar-collapse {
+    text-align: center;
+  }
+}
+
+/*# sourceMappingURL=navigation.css.map */

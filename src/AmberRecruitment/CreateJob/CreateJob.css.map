@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,WAAW,CAAC;EAEV,UAAU,EAAE,MAAM;EAClB,MAAM,EAAE,IAAI;EACZ,WAAW,EAAE,KAAK;CAKnB;;AATD,AAME,WANS,CAMT,MAAM,CAAC;EACL,gBAAgB,EAAE,kBAAkB;CACrC",
+    "sources": [
+        "CreateJob.scss"
+    ],
+    "names": [],
+    "file": "CreateJob.css"
+}
