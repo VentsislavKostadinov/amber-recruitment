@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {MDBCol, MDBInput, MDBBtn} from 'mdbreact';
-import './CreateJob.css';
+import './style/CreateJob.css';
 import fire from "../Firebase/context";
 import JobList from "../JobList/JobList";
 import showNotification from "../notifications";

@@ -3,7 +3,7 @@ import {MDBNavbar, MDBNavbarBrand, MDBNavLink, MDBNavbarToggler, MDBCollapse} fr
 import SignInLinks from "./SignInLinks";
 import SignOutLinks from "./SignOutLinks";
 import fire from "../Firebase/context";
-import './navigation.css'
+import './style/navigation.css'
 
 export default class Navigation extends Component {
 

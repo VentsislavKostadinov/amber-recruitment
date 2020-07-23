@@ -3,7 +3,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBModal, MDBModalHeade
 import fire from "../Firebase/context";
 
 
-import './LoginModal.css';
+import './style/LoginModal.css';
 
 import showNotification from "../notifications";
 
@@ -64,6 +64,7 @@ import showNotification from "../notifications";
 
                 })
                 .catch(error => {
+                    wrongPassword.style.color = 'red';
                     wrongPassword.textContent = error.message;
                 })
         }

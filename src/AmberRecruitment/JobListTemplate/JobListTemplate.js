@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
-import './JobListTemplate.css'
+import './style/JobListTemplate.css'
 
 function JobListTemplate() {
     return (

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBModal, MDBModalHeader} from 'mdbreact';
 import fire from "../Firebase/context";
-import './RegisterModal.css';
+import './style/RegisterModal.css';
 
 import showNotification from "../notifications";
 
