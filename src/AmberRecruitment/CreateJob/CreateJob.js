@@ -30,7 +30,7 @@ export default class CreateJob extends Component {
     handleSubmitJob = (e) => {
         e.preventDefault();
 
-        const {jobTitle, jobDescription} = this.state;
+        let {jobTitle, jobDescription} = this.state;
 
         if (jobTitle !== '' && jobDescription !== '') {
 
@@ -44,7 +44,7 @@ export default class CreateJob extends Component {
 
             }).catch(err => {
 
-                console.log(err);
+                console.log(err.message);
             })
 
         }
