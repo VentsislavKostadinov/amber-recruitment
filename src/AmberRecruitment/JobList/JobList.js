@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, } from 'mdbreact';
+import { MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, } from 'mdbreact';
 import fire from "../Firebase/context";
 
 class JobList extends Component {
@@ -47,11 +47,9 @@ class JobList extends Component {
                     </MDBCard>
                 )}
             </MDBCol>
-
         );
     }
 }
-
 export default JobList;
 
 

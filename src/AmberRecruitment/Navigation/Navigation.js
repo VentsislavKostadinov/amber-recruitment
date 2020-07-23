@@ -16,8 +16,6 @@ export default class Navigation extends Component {
         };
 
     }
-
-
     toggleCollapse = () => {
         this.setState({isOpen: !this.state.isOpen});
     }

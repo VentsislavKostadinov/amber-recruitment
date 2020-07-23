@@ -30,6 +30,7 @@ export default class SignInLinks extends Component {
 
             } else {
                 this.setState({user: null});
+
             }
         })
     }
