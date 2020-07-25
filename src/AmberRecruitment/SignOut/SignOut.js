@@ -8,10 +8,13 @@ export default class SignOut extends Component {
     logout = ()=> {
 
         fire.auth().signOut()
-            .then(res => {
-                console.log(res);
+            .then(() => {
                 showNotification('Successful logout', '')
             })
+            .catch(err => {
+                console.log(err);
+            })
+
     }
 
     render() {

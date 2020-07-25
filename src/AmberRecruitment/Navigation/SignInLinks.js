@@ -3,6 +3,7 @@ import {MDBNavbarNav, MDBNavItem, MDBNavLink} from "mdbreact";
 import SignOut from "../SignOut/SignOut";
 import fire from "../Firebase/context";
 
+
 export default class SignInLinks extends Component {
 
     constructor(props) {
@@ -15,6 +16,10 @@ export default class SignInLinks extends Component {
 
     componentDidMount() {
         this.authListener()
+    }
+
+    componentWillUnmount() {
+        this.authListener();
     }
 
     authListener = () => {

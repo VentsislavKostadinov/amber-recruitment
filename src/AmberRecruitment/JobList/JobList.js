@@ -13,7 +13,7 @@ class JobList extends Component {
     }
 
     onCollectionUpdate = (querySnapshot) => {
-        const boards = [];
+        let boards = [];
         querySnapshot.forEach((doc) => {
             const { jobTitle, jobDescription } = doc.data();
             boards.push({

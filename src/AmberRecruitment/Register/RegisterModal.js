@@ -12,6 +12,7 @@ export default class RegisterModal extends Component {
         registerPassword: '',
         confirmPassword: ''
     }
+
     // Toggle modal button
     toggle = () => {
         this.setState({
@@ -60,7 +61,6 @@ export default class RegisterModal extends Component {
             wrongPasswords.textContent = 'Passwords not match';
             return;
         }
-
 
         fire.auth().createUserWithEmailAndPassword(registerUserEmail, registerPassword)
             .then(response => {

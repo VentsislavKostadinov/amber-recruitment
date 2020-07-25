@@ -3,6 +3,7 @@ import {MDBNavbar, MDBNavbarBrand, MDBNavLink, MDBNavbarToggler, MDBCollapse} fr
 import SignInLinks from "./SignInLinks";
 import SignOutLinks from "./SignOutLinks";
 import fire from "../Firebase/context";
+
 import './style/navigation.css'
 
 export default class Navigation extends Component {
@@ -16,6 +17,7 @@ export default class Navigation extends Component {
         };
 
     }
+
     toggleCollapse = () => {
         this.setState({isOpen: !this.state.isOpen});
     }
@@ -45,18 +47,17 @@ export default class Navigation extends Component {
     render() {
 
         return (
+                <MDBNavbar color="indigo" dark expand="md" className='bg-transparent'>
 
-            <MDBNavbar color="indigo" dark expand="md" className='bg-transparent'>
-
-                <MDBNavbarBrand><MDBNavLink to="/">
-                    <strong className="white-text text-center">Amber<br/> Recruitment</strong>
-                </MDBNavLink>
-                </MDBNavbarBrand>
-                <MDBNavbarToggler onClick={this.toggleCollapse}/>
-                <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-                    {this.state.user ? (<SignInLinks/>) : (<SignOutLinks/>)}
-                </MDBCollapse>
-            </MDBNavbar>
+                    <MDBNavbarBrand><MDBNavLink to="/">
+                        <strong className="white-text text-center">Amber<br/> Recruitment</strong>
+                    </MDBNavLink>
+                    </MDBNavbarBrand>
+                    <MDBNavbarToggler onClick={this.toggleCollapse}/>
+                    <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
+                        {this.state.user ? (<SignInLinks/>) : (<SignOutLinks/>)}
+                    </MDBCollapse>
+                </MDBNavbar>
 
         );
     }
