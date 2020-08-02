@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, } from 'mdbreact';
 import fire from "../Firebase/context";
 
+
 class JobList extends Component {
     constructor(props) {
         super(props);
@@ -33,11 +34,15 @@ class JobList extends Component {
     }
 
     render() {
+        
+    let deleteJob = <div>
+        <a href="#" className="close" data-dismiss="alert"  aria-label="close">&times;</a>
+       </div>
         return (
             <MDBCol>
                 {this.state.boards.map(board =>
                     <MDBCard key={board.key} style={{ margin: '20px' }}>
-                        <MDBCardBody>
+                    <MDBCardBody >{deleteJob}
                             <MDBCardTitle >{board.jobTitle}</MDBCardTitle>
                             <MDBCardText>
                                 {board.jobDescription}
