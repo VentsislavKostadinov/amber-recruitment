@@ -26,6 +26,7 @@ export default class Navigation extends Component {
         this.authListener()
     }
 
+    
     authListener = () => {
         let userDetails = document.querySelector('.user-info');
 

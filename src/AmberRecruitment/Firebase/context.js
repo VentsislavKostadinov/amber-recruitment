@@ -18,7 +18,6 @@ const fire = firebase.initializeApp(config);
 
 export default fire;
 
-//module.exports = {fire, auth}
 
 
 
