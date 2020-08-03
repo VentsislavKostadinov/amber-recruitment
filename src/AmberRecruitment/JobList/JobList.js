@@ -11,6 +11,8 @@ class JobList extends Component {
         this.state = {
             boards: []
         };
+        this.user = {}
+
     }
 
     onCollectionUpdate = (querySnapshot) => {
@@ -31,18 +33,32 @@ class JobList extends Component {
 
     componentDidMount() {
         this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+        this.authListener();
+    }
+
+    authListener = () => {
+
+        // let cardBody = document.querySelector('.card-body');
+
+        fire.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({ user });
+
+
+            } else {
+
+            }
+        })
     }
 
     render() {
-        
-    let deleteJob = <div>
-        <a href="#" className="close" data-dismiss="alert"  aria-label="close">&times;</a>
-       </div>
+        let deleteJob = <div><a href="/" className="close" data-dismiss="alert" aria-label="close">&times;</a> </div>
+
         return (
             <MDBCol>
                 {this.state.boards.map(board =>
                     <MDBCard key={board.key} style={{ margin: '20px' }}>
-                    <MDBCardBody >{deleteJob}
+                        <MDBCardBody >{this.state.user ? deleteJob : null}
                             <MDBCardTitle >{board.jobTitle}</MDBCardTitle>
                             <MDBCardText>
                                 {board.jobDescription}

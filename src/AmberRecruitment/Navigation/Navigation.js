@@ -3,9 +3,7 @@ import {MDBNavbar, MDBNavbarBrand, MDBNavLink, MDBNavbarToggler, MDBCollapse} fr
 import SignInLinks from "./SignInLinks";
 import SignOutLinks from "./SignOutLinks";
 import fire from "../Firebase/context";
-
 import './style/navigation.css'
-
 
 export default class Navigation extends Component {
 
@@ -16,8 +14,7 @@ export default class Navigation extends Component {
             modal: false,
             user: {}
         };
-
-        
+      
     }
 
     toggleCollapse = () => {
@@ -26,33 +23,28 @@ export default class Navigation extends Component {
 
     componentDidMount() {
         this.authListener()
+    
     }
 
     
     authListener = () => {
         let userDetails = document.querySelector('.user-info');
-        
-
-
+    
         fire.auth().onAuthStateChanged(user => {
             if (user) {
 
                 this.setState({user});
                 let userInformation = `Welcome, ${user.email}`;
                 userDetails.innerHTML = userInformation;
-              
-            
-
+               
             } else {
                 this.setState({user: null});
-               
-              
-            
             }
         })
     }
 
     render() {
+     
 
         return (
                 <MDBNavbar color="indigo" dark expand="md" className='bg-transparent'>
