@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/amber-recruitment/precache-manifest.aa3367602c0c64e19c5e6a927b732546.js"
+  "/amber-recruitment/precache-manifest.6626d012831ff5597d3eab7b08f0ac60.js"
 );
 
 self.addEventListener('message', (event) => {

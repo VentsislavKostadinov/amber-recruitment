@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/amber-recruitment/static/css/main.cab6e2c8.chunk.css",
-    "main.js": "/amber-recruitment/static/js/main.9f63b7bb.chunk.js",
-    "main.js.map": "/amber-recruitment/static/js/main.9f63b7bb.chunk.js.map",
+    "main.js": "/amber-recruitment/static/js/main.573cc3f4.chunk.js",
+    "main.js.map": "/amber-recruitment/static/js/main.573cc3f4.chunk.js.map",
     "runtime-main.js": "/amber-recruitment/static/js/runtime-main.8fcf42e6.js",
     "runtime-main.js.map": "/amber-recruitment/static/js/runtime-main.8fcf42e6.js.map",
     "static/css/2.07813923.chunk.css": "/amber-recruitment/static/css/2.07813923.chunk.css",
     "static/js/2.af31b315.chunk.js": "/amber-recruitment/static/js/2.af31b315.chunk.js",
     "static/js/2.af31b315.chunk.js.map": "/amber-recruitment/static/js/2.af31b315.chunk.js.map",
     "index.html": "/amber-recruitment/index.html",
-    "precache-manifest.aa3367602c0c64e19c5e6a927b732546.js": "/amber-recruitment/precache-manifest.aa3367602c0c64e19c5e6a927b732546.js",
+    "precache-manifest.6626d012831ff5597d3eab7b08f0ac60.js": "/amber-recruitment/precache-manifest.6626d012831ff5597d3eab7b08f0ac60.js",
     "service-worker.js": "/amber-recruitment/service-worker.js",
     "static/css/2.07813923.chunk.css.map": "/amber-recruitment/static/css/2.07813923.chunk.css.map",
     "static/css/main.cab6e2c8.chunk.css.map": "/amber-recruitment/static/css/main.cab6e2c8.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.07813923.chunk.css",
     "static/js/2.af31b315.chunk.js",
     "static/css/main.cab6e2c8.chunk.css",
-    "static/js/main.9f63b7bb.chunk.js"
+    "static/js/main.573cc3f4.chunk.js"
   ]
 }

@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c77bc7a60590b6783dbf565cafab6ebf",
+    "revision": "401ebcc4cc5dd64bb6767ba6cad63973",
     "url": "/amber-recruitment/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/amber-recruitment/static/css/2.07813923.chunk.css"
   },
   {
-    "revision": "49834a4d9f774a29005c",
+    "revision": "f593ac486425c5c49a66",
     "url": "/amber-recruitment/static/css/main.cab6e2c8.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/amber-recruitment/static/js/2.af31b315.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "49834a4d9f774a29005c",
-    "url": "/amber-recruitment/static/js/main.9f63b7bb.chunk.js"
+    "revision": "f593ac486425c5c49a66",
+    "url": "/amber-recruitment/static/js/main.573cc3f4.chunk.js"
   },
   {
     "revision": "56cb6b175635468c46ce",
