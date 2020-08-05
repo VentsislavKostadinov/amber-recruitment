@@ -44,9 +44,8 @@ class JobList extends Component {
             if (user) {
                 this.setState({ user });
 
-
             } else {
-
+                this.setState({user: null});
             }
         })
     }

@@ -7,12 +7,16 @@ import './style/navigation.css'
 
 export default class Navigation extends Component {
 
+
     constructor(props) {
+
+    
         super(props);
         this.state = {
             isOpen: false,
             modal: false,
             user: {}
+            
         };
       
     }
@@ -22,9 +26,11 @@ export default class Navigation extends Component {
     }
 
     componentDidMount() {
-        this.authListener()
+        this.authListener();
     
     }
+
+
 
     
     authListener = () => {

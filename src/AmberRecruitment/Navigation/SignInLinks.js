@@ -5,8 +5,10 @@ import fire from "../Firebase/context";
 
 
 export default class SignInLinks extends Component {
-
+  
     constructor(props) {
+       
+       
         super(props);
 
         this.state = {
@@ -15,16 +17,16 @@ export default class SignInLinks extends Component {
     }
 
     componentDidMount() {
-        this.authListener()
-    }
+        this.authListener();
 
+    }
     componentWillUnmount() {
         this.authListener();
     }
 
+
     authListener = () => {
         let userDetails = document.querySelector('.user-info');
-
 
         fire.auth().onAuthStateChanged(user => {
             if (user) {
