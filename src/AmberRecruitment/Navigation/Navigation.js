@@ -5,20 +5,16 @@ import SignOutLinks from "./SignOutLinks";
 import fire from "../Firebase/context";
 import './style/navigation.css'
 
+
 export default class Navigation extends Component {
 
-
     constructor(props) {
-
-    
         super(props);
         this.state = {
             isOpen: false,
             modal: false,
             user: {}
-            
         };
-      
     }
 
     toggleCollapse = () => {
@@ -27,13 +23,10 @@ export default class Navigation extends Component {
 
     componentDidMount() {
         this.authListener();
+
     
     }
-
-
-
-    
-    authListener = () => {
+   authListener = () => {
         let userDetails = document.querySelector('.user-info');
     
         fire.auth().onAuthStateChanged(user => {
@@ -50,8 +43,6 @@ export default class Navigation extends Component {
     }
 
     render() {
-     
-
         return (
                 <MDBNavbar color="indigo" dark expand="md" className='bg-transparent'>
                     <MDBNavbarBrand><MDBNavLink to="/">
@@ -59,12 +50,11 @@ export default class Navigation extends Component {
                     </MDBNavLink>
                     </MDBNavbarBrand>
                     <MDBNavbarToggler onClick={this.toggleCollapse}/>
+
                     <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
                         {this.state.user ? (<SignInLinks/>) : (<SignOutLinks/>)}
-                      
                     </MDBCollapse>
                 </MDBNavbar>
-
         );
     }
 }

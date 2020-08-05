@@ -2,32 +2,35 @@ import React, { Component } from 'react'
 import { MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, } from 'mdbreact';
 import fire from "../Firebase/context";
 
+let currentId = null;
 
-class JobList extends Component {
+export  default class JobList extends Component {
+
     constructor(props) {
         super(props);
         this.ref = fire.firestore().collection('jobs');
         this.unsubscribe = null;
         this.state = {
-            boards: []
+            currentJobList: []
         };
         this.user = {}
-
     }
 
     onCollectionUpdate = (querySnapshot) => {
-        let boards = [];
-        querySnapshot.forEach((doc) => {
+        let currentJobList = [];
+        querySnapshot.forEach(doc => {
             const { jobTitle, jobDescription } = doc.data();
-            boards.push({
+            currentJobList.push({
                 key: doc.id,
                 doc,
                 jobTitle,
                 jobDescription
             });
+
+            currentId = doc.id;
         });
         this.setState({
-            boards
+            currentJobList
         });
     }
 
@@ -37,9 +40,6 @@ class JobList extends Component {
     }
 
     authListener = () => {
-
-        // let cardBody = document.querySelector('.card-body');
-
         fire.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({ user });
@@ -50,17 +50,21 @@ class JobList extends Component {
         })
     }
 
-    render() {
-        let deleteJob = <div><a href="/" className="close" data-dismiss="alert" aria-label="close">&times;</a> </div>
+    onDelete = (e) => {
+        e.preventDefault();
+            fire.firestore().collection('jobs').doc(currentId).delete();
+    }
 
+    render() {
+        let deleteJob = <div><a href="/#" className="close" data-dismiss="alert" aria-label="close" onClick={this.onDelete}>&times;</a> </div>
         return (
             <MDBCol>
-                {this.state.boards.map(board =>
-                    <MDBCard key={board.key} style={{ margin: '20px' }}>
+                {this.state.currentJobList.map(job =>
+                    <MDBCard key={job.key} style={{ margin: '20px' }}>
                         <MDBCardBody >{this.state.user ? deleteJob : null}
-                            <MDBCardTitle >{board.jobTitle}</MDBCardTitle>
+                            <MDBCardTitle >{job.jobTitle}</MDBCardTitle>
                             <MDBCardText>
-                                {board.jobDescription}
+                                {job.jobDescription}
                             </MDBCardText>
                             <MDBBtn color="elegant" href="#">Find out more</MDBBtn>
                         </MDBCardBody>
@@ -70,7 +74,7 @@ class JobList extends Component {
         );
     }
 }
-export default JobList;
+
 
 
 
