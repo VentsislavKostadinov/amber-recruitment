@@ -11,7 +11,6 @@ export default class CreateJob extends Component {
             jobDescription: ''
         }
 
-
     handleJobTitle = (e) => {
 
         this.setState({
@@ -42,12 +41,12 @@ export default class CreateJob extends Component {
                 showNotification('Data added', '');
 
             }).catch(err => {
-
                 console.log(err.message);
             })
-
         }
+
     }
+
 
     render() {
 
@@ -58,9 +57,9 @@ export default class CreateJob extends Component {
                     <div className="grey-text">
                         <MDBInput onChange={this.handleJobTitle} label="Type a new job title" group type="text"
                                   id='job-title' validate error="wrong"
-                                  success="right"/>
+                                  success="right" />
                         <MDBInput onChange={this.handleJobDescription} label="Job details" group id='job-description'
-                                  type="textarea" rows="5"/>
+                                  type="textarea" rows="5" />
                     </div>
                     <div className="text-center">
                         <MDBBtn onClick={this.handleSubmitJob}>Post</MDBBtn>
