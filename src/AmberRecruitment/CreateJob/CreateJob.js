@@ -38,7 +38,7 @@ export default class CreateJob extends Component {
 
             }).then(res => {
                 console.log(res);
-                showNotification('Data added', '');
+                showNotification('Job added: ', jobTitle);
 
             }).catch(err => {
                 console.log(err.message);
@@ -47,6 +47,15 @@ export default class CreateJob extends Component {
 
     }
 
+    enterPressed = (e) => {
+        if (e.key === 'Enter') {
+            this.handleSubmitJob(e);
+        }
+    }
+
+    componentWillUnmount() {
+         console.log('job added');
+    }
 
     render() {
 
@@ -59,7 +68,7 @@ export default class CreateJob extends Component {
                                   id='job-title' validate error="wrong"
                                   success="right" />
                         <MDBInput onChange={this.handleJobDescription} label="Job details" group id='job-description'
-                                  type="textarea" rows="5" />
+                                  type="textarea" rows="5"  onKeyPress={this.enterPressed}/>
                     </div>
                     <div className="text-center">
                         <MDBBtn onClick={this.handleSubmitJob}>Post</MDBBtn>
