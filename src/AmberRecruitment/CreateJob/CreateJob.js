@@ -54,11 +54,11 @@ export default class CreateJob extends Component {
     }
 
     componentWillUnmount() {
-         console.log('job added');
+
+         console.log('create a job Umounting');
     }
 
     render() {
-
         return (
             <MDBCol lg="6" id='create-job'>
                 <form>
