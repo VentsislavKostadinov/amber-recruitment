@@ -88,12 +88,12 @@ export default class CreateJob extends Component {
                 <form>
                     <p className="h5 text-center mb-4">Post a new job</p>
                     <div className="grey-text">
-                        <MDBInput onChange={this.handleJobTitle} label= "Type a new job title" group type="text"
+                        <MDBInput onChange={this.handleJobTitle} label="Type a new job title" group type="text"
                             id='job-title' validate error="wrong"
                             success="right" />
-                        <MDBInput onChange={this.handleJobSalary} label="Type an expected salary" group type="text"
+                        <MDBInput onChange={this.handleJobSalary} label="Expected salary" group type="text"
                             id="job-salary" validate error="wrong" />
-                              <MDBInput onChange={this.handleJobLocation} label="Type a location" group type="text"
+                        <MDBInput onChange={this.handleJobLocation} label="Location" group type="text"
                             id="job-salary" validate error="wrong" />
                         <MDBInput onChange={this.handleJobDescription} label="Job details" group id='job-description'
                             type="textarea" rows="5" onKeyPress={this.enterPressed} />

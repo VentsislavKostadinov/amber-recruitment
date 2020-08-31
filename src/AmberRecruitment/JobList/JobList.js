@@ -79,7 +79,7 @@ export default class JobList extends Component {
                             <MDBCardText><i className ="fas fa-pound-sign"></i> <b>{job.jobSalary}</b> per annum</MDBCardText>
                             <MDBCardText><i className="fas fa-map-marker-alt"></i> <b>{job.jobLocation}</b></MDBCardText>
                             <MDBCardText>{job.jobDescription}</MDBCardText>
-                            <MDBBtn color="elegant" href="#">Find out more</MDBBtn>
+                            <MDBBtn color="elegant" onClick={() => console.log('Clicked!')}>Find out more</MDBBtn>
                         </MDBCardBody>
                     </MDBCard>
                 )}
