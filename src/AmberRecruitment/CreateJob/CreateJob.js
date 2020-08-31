@@ -1,20 +1,36 @@
-import React, {Component} from "react";
-import {MDBCol, MDBInput, MDBBtn} from 'mdbreact';
+import React, { Component } from "react";
+import { MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import './style/CreateJob.css';
 import fire from "../Firebase/context";
 import showNotification from "../notifications";
 
 export default class CreateJob extends Component {
 
-        state = {
-            jobTitle: '',
-            jobDescription: ''
-        }
+    state = {
+        jobTitle: '',
+        jobSalary: '',
+        jobLocation: '',
+        jobDescription: ''
+    }
 
     handleJobTitle = (e) => {
 
         this.setState({
             jobTitle: e.target.value
+        })
+    }
+
+    handleJobSalary = (e) => {
+
+        this.setState({
+            jobSalary: e.target.value,
+        })
+    }
+
+    handleJobLocation = (e) => {
+
+        this.setState({
+            jobLocation: e.target.value
         })
     }
 
@@ -28,23 +44,31 @@ export default class CreateJob extends Component {
     handleSubmitJob = (e) => {
         e.preventDefault();
 
-        let {jobTitle, jobDescription} = this.state;
+        let requiredFields = document.getElementById('create-job-required-fields');
 
-        if (jobTitle !== '' && jobDescription !== '') {
+        let { jobTitle, jobSalary, jobLocation, jobDescription } = this.state;
+
+        if (jobTitle !== '' && jobSalary !== '' && jobLocation && jobDescription !== '') {
 
             fire.firestore().collection('jobs').add({
                 jobTitle,
+                jobSalary,
+                jobLocation,
                 jobDescription
 
             }).then(res => {
                 console.log(res);
-                showNotification('Job added: ', jobTitle);
+                showNotification('Job added: ', jobTitle, jobSalary, jobLocation, jobDescription);
 
             }).catch(err => {
                 console.log(err.message);
-            })
-        }
 
+            })
+
+        } else {
+            requiredFields.style.color = 'red';
+            requiredFields.textContent = 'All Fields Required';
+        }
     }
 
     enterPressed = (e) => {
@@ -55,7 +79,7 @@ export default class CreateJob extends Component {
 
     componentWillUnmount() {
 
-         console.log('create a job Umounting');
+        console.log('Job Umounting');
     }
 
     render() {
@@ -64,11 +88,16 @@ export default class CreateJob extends Component {
                 <form>
                     <p className="h5 text-center mb-4">Post a new job</p>
                     <div className="grey-text">
-                        <MDBInput onChange={this.handleJobTitle} label="Type a new job title" group type="text"
-                                  id='job-title' validate error="wrong"
-                                  success="right" />
+                        <MDBInput onChange={this.handleJobTitle} label= "Type a new job title" group type="text"
+                            id='job-title' validate error="wrong"
+                            success="right" />
+                        <MDBInput onChange={this.handleJobSalary} label="Type an expected salary" group type="text"
+                            id="job-salary" validate error="wrong" />
+                              <MDBInput onChange={this.handleJobLocation} label="Type a location" group type="text"
+                            id="job-salary" validate error="wrong" />
                         <MDBInput onChange={this.handleJobDescription} label="Job details" group id='job-description'
-                                  type="textarea" rows="5"  onKeyPress={this.enterPressed}/>
+                            type="textarea" rows="5" onKeyPress={this.enterPressed} />
+                        <p id="create-job-required-fields" />
                     </div>
                     <div className="text-center">
                         <MDBBtn onClick={this.handleSubmitJob}>Post</MDBBtn>

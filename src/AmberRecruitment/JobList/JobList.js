@@ -19,11 +19,13 @@ export default class JobList extends Component {
     onCollectionUpdate = (querySnapshot) => {
         let currentJobList = [];
         querySnapshot.forEach(doc => {
-            const {jobTitle, jobDescription} = doc.data();
+            const {jobTitle, jobSalary, jobLocation, jobDescription} = doc.data();
             currentJobList.push({
                 key: doc.id,
                 doc,
                 jobTitle,
+                jobSalary,
+                jobLocation,
                 jobDescription
             });
         });
@@ -55,7 +57,7 @@ export default class JobList extends Component {
     onDelete = (id) => {
         fire.firestore().collection('jobs').doc(id).delete()
             .then(() => {
-                console.log('Document successfully deleted!');
+                console.log('Document successfully added!');
                 showNotification('Successfully deleted', '')
 
             }).catch(error => {
@@ -74,6 +76,8 @@ export default class JobList extends Component {
                                         style={{color: 'red'}} onClick={() => this.onDelete(job.doc.id)}>&times;</a>
                                 </div>) : null}
                             <MDBCardTitle>{job.jobTitle}</MDBCardTitle>
+                            <MDBCardText><i className ="fas fa-pound-sign"></i> <b>{job.jobSalary}</b> per annum</MDBCardText>
+                            <MDBCardText><i className="fas fa-map-marker-alt"></i> <b>{job.jobLocation}</b></MDBCardText>
                             <MDBCardText>{job.jobDescription}</MDBCardText>
                             <MDBBtn color="elegant" href="#">Find out more</MDBBtn>
                         </MDBCardBody>
