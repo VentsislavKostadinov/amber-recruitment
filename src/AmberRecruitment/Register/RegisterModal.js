@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBModal, MDBModalHeader} from 'mdbreact';
+import React, { Component } from "react";
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBModal, MDBModalHeader } from 'mdbreact';
 import fire from "../Firebase/context";
 import './style/RegisterModal.css';
 
@@ -10,7 +10,8 @@ export default class RegisterModal extends Component {
         modal: false,
         registerUserEmail: '',
         registerPassword: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        checked: false
     }
 
     // Toggle modal button
@@ -37,13 +38,14 @@ export default class RegisterModal extends Component {
         this.setState({
             confirmPassword: e.target.value
         })
+
     }
 
     handleSubmitRegister = (e) => {
         e.preventDefault();
 
         // Checks for empty values
-        let {registerUserEmail, registerPassword, confirmPassword} = this.state;
+        let { registerUserEmail, registerPassword, confirmPassword } = this.state;
 
         if (registerUserEmail === '' || registerPassword === '' || confirmPassword === '') {
             let errorRegister = document.getElementById('error-register');
@@ -62,6 +64,7 @@ export default class RegisterModal extends Component {
             return;
         }
 
+
         fire.auth().createUserWithEmailAndPassword(registerUserEmail, registerPassword)
             .then(response => {
                 console.log(response);
@@ -69,6 +72,7 @@ export default class RegisterModal extends Component {
                 showNotification('Successful sign up, ', registerUserEmail);
 
             })
+
             .catch(error => {
                 console.log(error)
                 let passwordLength = document.getElementById('passwords-length');
@@ -76,6 +80,8 @@ export default class RegisterModal extends Component {
                 passwordLength.style.textAlign = 'center';
                 passwordLength.textContent = error;
             });
+
+
     }
 
     enterPressed = (e) => {
@@ -85,28 +91,29 @@ export default class RegisterModal extends Component {
     }
 
     render() {
+ 
         return (
             <MDBContainer id='modal-register'>
                 <MDBRow>
                     <MDBBtn onClick={this.toggle}>Register</MDBBtn>
-                    <MDBModal isOpen={this.state.modal} toggle={this.toggle}><br/>
+                    <MDBModal isOpen={this.state.modal} toggle={this.toggle}><br />
                         <MDBModalHeader toggle={this.toggle}>Register</MDBModalHeader>
                         <MDBCol>
                             <form>
                                 <div className='text-left'>
                                     <MDBInput onChange={this.handleRegisterUserEmail} label="Type your email"
-                                              id='registerUser' icon="envelope" group type="email"
-                                              validate error="wrong"
-                                              success="right" required/>
+                                        id='registerUser' icon="envelope" group type="email"
+                                        validate error="wrong"
+                                        success="right" required />
                                     <MDBInput onChange={this.handleRegisterUserPassword} label="Type your password"
-                                              id='registerPassword' icon="lock" group
-                                              type="password" validate required/>
+                                        id='registerPassword' icon="lock" group
+                                        type="password" validate required />
                                     <MDBInput onChange={this.handleConfirmRegisterPassword} label="Confirm password"
-                                              id='confirmPassword' icon="lock" group
-                                              type="password" onKeyPress={this.enterPressed} validate required/>
-                                    <p id='error-register'/>
-                                    <p id='wrong-passwords'/>
-                                    <p id='passwords-length'/>
+                                        id='confirmPassword' icon="lock" group
+                                        type="password" onKeyPress={this.enterPressed} validate required />
+                                    <p id='error-register' />
+                                    <p id='wrong-passwords' />
+                                    <p id='passwords-length' />
                                     <p>Password should be at least 6 characters</p>
                                 </div>
                                 <div className="text-center">

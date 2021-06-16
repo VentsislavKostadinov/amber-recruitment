@@ -4,15 +4,30 @@
   color: #000000;
 }
 
+/* DROPDOWN */
+.dropdown .dropdown-menu {
+  background-color: #3f51b5;
+  left: -8px !important;
+}
+
+.dropdown .dropdown-menu .dropdown-item {
+  color: #ffffff;
+}
+
+.dropdown .dropdown-menu .dropdown-item:hover {
+  background-color: #ffffff;
+  color: #3f51b5;
+}
+
 @media (max-width: 767px) {
   #modal-register > div > button {
     margin-left: 199px;
   }
 }
+
 @media (max-width: 564px) {
   #modal-register > div > button {
     margin: auto;
   }
 }
-
 /*# sourceMappingURL=RegisterModal.css.map */

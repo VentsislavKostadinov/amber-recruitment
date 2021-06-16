@@ -60,6 +60,9 @@ import showNotification from "../notifications";
                 .then((response) => {
                     console.log(response);
 
+                    // get uid of the user
+                    //console.log(response.user.uid);
+
                     showNotification('Successful login, ', userEmail)
 
                 })

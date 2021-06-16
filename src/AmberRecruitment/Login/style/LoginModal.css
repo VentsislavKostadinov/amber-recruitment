@@ -9,10 +9,10 @@
     margin-left: 207px;
   }
 }
+
 @media (max-width: 564px) {
   #modal-login > div > button {
     margin: 0 auto;
   }
 }
-
 /*# sourceMappingURL=LoginModal.css.map */

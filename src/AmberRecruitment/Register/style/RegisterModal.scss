@@ -4,6 +4,26 @@
   color: #000000;
 }
 
+/* DROPDOWN */
+
+.dropdown {
+
+  .dropdown-menu {
+    background-color: #3f51b5;
+    left: -8px !important;
+
+    .dropdown-item {
+      color: #ffffff;
+
+      &:hover {
+        background-color: #ffffff;
+        color: #3f51b5;
+      }
+    }
+
+  }
+}
+
 @media (max-width: 767px) {
   #modal-register > div > button {
     margin-left:199px;

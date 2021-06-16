@@ -1,1 +1,9 @@
-{"version":3,"sourceRoot":"","sources":["JobListTemplate.scss"],"names":[],"mappings":"AAAA;EACE;EACA;;AAEA;EACE","file":"JobListTemplate.css"}
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,kBAAkB,CAAC;EACjB,KAAK,EAAE,KAAK;EACZ,UAAU,EAAE,IAAI;CAMjB;;AARD,AAIE,kBAJgB,CAIhB,YAAY,CAAC;EACX,gBAAgB,EAAE,kBAAkB;CAErC",
+    "sources": [
+        "JobListTemplate.scss"
+    ],
+    "names": [],
+    "file": "JobListTemplate.css"
+}

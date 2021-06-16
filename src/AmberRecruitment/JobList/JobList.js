@@ -8,15 +8,15 @@ class JobList extends Component {
         this.ref = fire.firestore().collection('jobs');
         this.unsubscribe = null;
         this.state = {
-            boards: []
+            cuurrentJobs: []
         };
     }
 
     onCollectionUpdate = (querySnapshot) => {
-        let boards = [];
+        let cuurrentJobs = [];
         querySnapshot.forEach((doc) => {
             const { jobTitle, jobDescription } = doc.data();
-            boards.push({
+            cuurrentJobs.push({
                 key: doc.id,
                 doc,
                 jobTitle,
@@ -24,8 +24,10 @@ class JobList extends Component {
             });
         });
         this.setState({
-            boards
+            cuurrentJobs
         });
+
+        console.log(cuurrentJobs)
     }
 
     componentDidMount() {
@@ -33,14 +35,15 @@ class JobList extends Component {
     }
 
     render() {
+     
         return (
             <MDBCol>
-                {this.state.boards.map(board =>
-                    <MDBCard key={board.key} style={{ margin: '20px' }}>
+                {this.state.cuurrentJobs.map(job =>
+                    <MDBCard key={job.key} style={{ margin: '20px' }}>
                         <MDBCardBody>
-                            <MDBCardTitle >{board.jobTitle}</MDBCardTitle>
+                            <MDBCardTitle >{job.jobTitle}</MDBCardTitle>
                             <MDBCardText>
-                                {board.jobDescription}
+                                {job.jobDescription}
                             </MDBCardText>
                             <MDBBtn color="elegant" href="#">Find out more</MDBBtn>
                         </MDBCardBody>
