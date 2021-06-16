@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBModal, MDBModalHeader} from 'mdbreact';
 import fire from "../Firebase/context";
 
-
 import './style/LoginModal.css';
 
 import showNotification from "../notifications";

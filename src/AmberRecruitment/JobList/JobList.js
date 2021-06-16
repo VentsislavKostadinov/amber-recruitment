@@ -38,12 +38,12 @@ class JobList extends Component {
      
         return (
             <MDBCol>
-                {this.state.cuurrentJobs.map(job =>
-                    <MDBCard key={job.key} style={{ margin: '20px' }}>
+                {this.state.cuurrentJobs.map(board =>
+                    <MDBCard key={board.key} style={{ margin: '20px' }}>
                         <MDBCardBody>
-                            <MDBCardTitle >{job.jobTitle}</MDBCardTitle>
+                            <MDBCardTitle >{board.jobTitle}</MDBCardTitle>
                             <MDBCardText>
-                                {job.jobDescription}
+                                {board.jobDescription}
                             </MDBCardText>
                             <MDBBtn color="elegant" href="#">Find out more</MDBBtn>
                         </MDBCardBody>
