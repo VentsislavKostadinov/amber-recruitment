@@ -1,51 +1,87 @@
-import React, { Component } from 'react'
-import { MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, } from 'mdbreact';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from 'mdbreact';
 import fire from "../Firebase/context";
+import showNotification from "../notifications";
 
-class JobList extends Component {
+
+export default class JobList extends Component {
+
     constructor(props) {
         super(props);
         this.ref = fire.firestore().collection('jobs');
         this.unsubscribe = null;
+
         this.state = {
-            currentJobs: []
-        };
+            currentJobList: [],
+            user: {}
+        }
     }
 
     onCollectionUpdate = (querySnapshot) => {
-        let currentJobs = [];
-        querySnapshot.forEach((doc) => {
-            const { jobTitle, jobDescription } = doc.data();
-            currentJobs.push({
+        let currentJobList = [];
+        querySnapshot.forEach(doc => {
+            const {jobTitle, jobSalary, jobLocation, jobDescription} = doc.data();
+            currentJobList.push({
                 key: doc.id,
                 doc,
                 jobTitle,
+                jobSalary,
+                jobLocation,
                 jobDescription
             });
         });
         this.setState({
-            currentJobs
+            currentJobList
         });
-
-        console.log(currentJobs)
     }
-
     componentDidMount() {
         this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+        this.authListener();
+    }
+
+    componentWillMount() {
+         this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+       this.authListener();
+    }
+
+    authListener = () => {
+        fire.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({user});
+
+            } else {
+                this.setState({user: null});
+            }
+        })
+    }
+
+    onDelete = (id) => {
+        fire.firestore().collection('jobs').doc(id).delete()
+            .then(() => {
+                console.log('Document successfully added!');
+                showNotification('Successfully deleted', '')
+
+            }).catch(error => {
+            console.log('Error removing ', error.message);
+        })
     }
 
     render() {
-     
         return (
             <MDBCol>
-                {this.state.currentJobs.map(jobs =>
-                    <MDBCard key={jobs.key} style={{ margin: '20px' }}>
+                {this.state.currentJobList.map(job =>
+                    <MDBCard key={job.key} style={{margin: '20px'}} id={job.doc.id}>
                         <MDBCardBody>
-                            <MDBCardTitle >{jobs.jobTitle}</MDBCardTitle>
-                            <MDBCardText>
-                                {jobs.jobDescription}
-                            </MDBCardText>
-                            <MDBBtn color="elegant" href="#">Find out more</MDBBtn>
+                            {this.state.user ? (
+                                <div><a href="/#" className="close" data-dismiss="alert" aria-label="close"
+                                        style={{color: 'red'}} onClick={() => this.onDelete(job.doc.id)}>&times;</a>
+                                </div>) : null}
+                            <MDBCardTitle>{job.jobTitle}</MDBCardTitle>
+                            <MDBCardText><i className ="fas fa-pound-sign"></i> <b>{job.jobSalary}</b> per annum</MDBCardText>
+                            <MDBCardText><i className="fas fa-map-marker-alt"></i> <b>{job.jobLocation}</b></MDBCardText>
+                            <MDBCardText>{job.jobDescription}</MDBCardText>
+                            <MDBBtn color="elegant" onClick={() => console.log(job.doc.id)}>Find out more</MDBBtn>
                         </MDBCardBody>
                     </MDBCard>
                 )}
@@ -53,13 +89,3 @@ class JobList extends Component {
         );
     }
 }
-export default JobList;
-
-
-
-
-
-
-
-
-
