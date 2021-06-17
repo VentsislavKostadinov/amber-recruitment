@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from 'mdbreact';
+import {MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBNavLink } from 'mdbreact';
 import fire from "../Firebase/context";
 import showNotification from "../notifications";
+import JobDescription from '../JobDescription/JobDescription';
 
 
 export default class JobList extends Component {
@@ -15,6 +15,7 @@ export default class JobList extends Component {
         this.state = {
             currentJobList: [],
             user: {}
+           
         }
     }
 
@@ -22,6 +23,7 @@ export default class JobList extends Component {
         let currentJobList = [];
         querySnapshot.forEach(doc => {
             const {jobTitle, jobSalary, jobLocation, jobDescription} = doc.data();
+           
             currentJobList.push({
                 key: doc.id,
                 doc,
@@ -50,9 +52,9 @@ export default class JobList extends Component {
             if (user) {
                 this.setState({user});
 
-                user.getIdTokenResult().then(idTokenResult => {
-                    console.log(idTokenResult.claims.admin);
-                })
+               // user.getIdTokenResult().then(idTokenResult => {
+               //     console.log(idTokenResult.claims.admin);
+               // })
 
             } else {
                 this.setState({user: null});
@@ -71,10 +73,21 @@ export default class JobList extends Component {
         })
     }
 
+    sayHello = (jobDetails) => {
+       let test = [];
+        test.push(jobDetails)
+        console.log(test);
+     //   test.push(jobTitleTest)
+      
+    }
+
+
     render() {
+
         return (
             <MDBCol>
                 {this.state.currentJobList.map(job =>
+                
                     <MDBCard key={job.key} style={{margin: '20px'}} id={job.doc.id}>
                         <MDBCardBody>
                             {this.state.user ? (
@@ -85,7 +98,9 @@ export default class JobList extends Component {
                             <MDBCardText><i className ="fas fa-pound-sign"></i> <b>{job.jobSalary}</b> per annum</MDBCardText>
                             <MDBCardText><i className="fas fa-map-marker-alt"></i> <b>{job.jobLocation}</b></MDBCardText>
                             <MDBCardText>{job.jobDescription}</MDBCardText>
-                            <MDBBtn color="elegant" onClick={() => console.log(job.doc.id)}>Find out more</MDBBtn>
+                            <MDBNavLink to={`/job-description/${job.doc.id}/${job.jobTitle}`} >
+                            <MDBBtn color="elegant" onClick={() => this.sayHello(job)}>Find out more</MDBBtn>
+                            </MDBNavLink>
                         </MDBCardBody>
                     </MDBCard>
                 )}
