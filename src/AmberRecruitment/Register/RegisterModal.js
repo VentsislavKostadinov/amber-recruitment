@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBModal, MDBModalHeader } from 'mdbreact';
-import fire from "../Firebase/context";
 import './style/RegisterModal.css';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBModal, MDBModalHeader } from 'mdbreact';
 
+
+
+import fire from "../Firebase/context";
+import firebase from "firebase";
 import showNotification from "../notifications";
+
+const functions = firebase.functions();
 
 export default class RegisterModal extends Component {
     state = {
@@ -11,7 +16,7 @@ export default class RegisterModal extends Component {
         registerUserEmail: '',
         registerPassword: '',
         confirmPassword: '',
-        checked: false
+        isChecked: true
     }
 
     // Toggle modal button
@@ -45,7 +50,7 @@ export default class RegisterModal extends Component {
         e.preventDefault();
 
         // Checks for empty values
-        let { registerUserEmail, registerPassword, confirmPassword } = this.state;
+        let { registerUserEmail, registerPassword, confirmPassword, isChecked } = this.state;
 
         if (registerUserEmail === '' || registerPassword === '' || confirmPassword === '') {
             let errorRegister = document.getElementById('error-register');
@@ -90,8 +95,24 @@ export default class RegisterModal extends Component {
         }
     }
 
+
+
+    onMakeAdmin = () => {
+
+
+        let { registerUserEmail } = this.state;
+
+        const addAdminRole = functions.httpsCallable('addAdminRole');
+        addAdminRole({ email: registerUserEmail }).then(result => {
+            console.log(result);
+
+        })
+
+    }
+
+
     render() {
- 
+
         return (
             <MDBContainer id='modal-register'>
                 <MDBRow>
@@ -117,8 +138,9 @@ export default class RegisterModal extends Component {
                                     <p>Password should be at least 6 characters</p>
                                 </div>
                                 <div className="text-center">
-
+                                    <MDBBtn onClick={this.onMakeAdmin}>Make Admin</MDBBtn>
                                     <MDBBtn onClick={this.handleSubmitRegister}>Register</MDBBtn>
+
                                 </div>
                             </form>
                         </MDBCol>

@@ -7,13 +7,12 @@ import './style/navigation.css'
 
 export default class Navigation extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
+   
+        state = {
             isOpen: false,
-           user: {}
+            user: {}
         };
-     }
+     
 
     toggleCollapse = () => {
         this.setState({isOpen: !this.state.isOpen});

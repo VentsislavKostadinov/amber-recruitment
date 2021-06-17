@@ -50,6 +50,10 @@ export default class JobList extends Component {
             if (user) {
                 this.setState({user});
 
+                user.getIdTokenResult().then(idTokenResult => {
+                    console.log(idTokenResult.claims.admin);
+                })
+
             } else {
                 this.setState({user: null});
             }

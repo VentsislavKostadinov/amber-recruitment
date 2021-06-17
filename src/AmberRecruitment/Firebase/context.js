@@ -11,12 +11,14 @@ const config = {
 };
 // Initialize Firebase
 const fire = firebase.initializeApp(config);
+
 //const auth = fire.auth();
 
 //const firebase = firebase.auth();
 //const db = firebase.firestore();
 
 export default fire;
+
 
 
 
