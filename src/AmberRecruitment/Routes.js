@@ -14,7 +14,6 @@ export default class Routes extends Component {
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path='/jobs/' component={JobList}/>
-                   {/* <Route path="/jobs/:id" component={JobListId}/> */}
                     <Route path='/create-a-job/' component={CreateJob}/>
                     <Route path='/job-description/' component={JobDescription}/>
                     <Route component={NotFoundPage}/>

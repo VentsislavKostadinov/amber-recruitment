@@ -15,8 +15,8 @@ export default class RegisterModal extends Component {
         modal: false,
         registerUserEmail: '',
         registerPassword: '',
-        confirmPassword: '',
-        isChecked: true
+        confirmPassword: ''
+        
     }
 
     // Toggle modal button
@@ -50,7 +50,7 @@ export default class RegisterModal extends Component {
         e.preventDefault();
 
         // Checks for empty values
-        let { registerUserEmail, registerPassword, confirmPassword, isChecked } = this.state;
+        let { registerUserEmail, registerPassword, confirmPassword } = this.state;
 
         if (registerUserEmail === '' || registerPassword === '' || confirmPassword === '') {
             let errorRegister = document.getElementById('error-register');

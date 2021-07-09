@@ -1,14 +1,16 @@
 //import React from 'react';
+//import { propTypes } from 'react-bootstrap/esm/Image';
+//import JobList from '../JobList/JobList';
+
 
 /*const JobDescription = (props) => {
-    
 
-    return(
-        <div>
-            <h2></h2>
-        </div>
-    )
-}
+
+return (
+     
+   <div>Empty</div>
+    ) 
+} 
 
 export default JobDescription; */
 
@@ -18,12 +20,18 @@ import JobList from '../JobList/JobList';
 
 class JobDescription extends Component {
 
-    render() {
 
-        return <div>
-            <JobList message="Hello " />
-        </div>;
-    }
+  render() {
+
+    console.log(window.jobName)
+
+    return (
+
+      <div>
+        <h2>{window.jobName.jobTitle}</h2>
+      </div>
+    )
+  }
 }
 
 export default JobDescription;
