@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Home from "./Home/Home";
-import CreateJob from "./CreateJob/CreateJob";
-import JobList from "./JobList/JobList";
-import JobDescription from './JobDescription/JobDescription';
+import CreateTask from "./CreateJob/CreateTask";
+import TaskList from './TaskList/TaskList';
 import NotFoundPage from "./NotFoundPage/NotFoundPage";
 
 export default class Routes extends Component {
@@ -13,9 +12,8 @@ export default class Routes extends Component {
             <div>
                 <Switch>
                     <Route exact path='/' component={Home}/>
-                    <Route path='/jobs/' component={JobList}/>
-                    <Route path='/create-a-job/' component={CreateJob}/>
-                    <Route path='/job-description/' component={JobDescription}/>
+                    <Route path='/tasks/' component={TaskList}/>
+                    <Route path='/create-a-task/' component={CreateTask}/>
                     <Route component={NotFoundPage}/>
                 </Switch>
             </div>

@@ -13,7 +13,7 @@ const SignOutLinks = () => {
                         <MDBNavLink to="/">Home</MDBNavLink>
                     </MDBNavItem>
                     <MDBNavItem>
-                        <MDBNavLink to="/jobs">Job list</MDBNavLink>
+                        <MDBNavLink to="/tasks">Task list</MDBNavLink>
                     </MDBNavItem>
                 </MDBNavbarNav>
                 <MDBNavbarNav right>

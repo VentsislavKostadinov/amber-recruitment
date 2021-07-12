@@ -14,10 +14,10 @@ export default class SignInLinks extends Component {
                 <>
                 <MDBNavbarNav className='ml-auto'>
                     <MDBNavItem>
-                        <MDBNavLink to="/jobs">Job list</MDBNavLink>
+                        <MDBNavLink to="/tasks">Task list</MDBNavLink>
                     </MDBNavItem>
                     <MDBNavItem>
-                        <MDBNavLink to="/create-a-job">Create a job</MDBNavLink>
+                        <MDBNavLink to="/create-a-task">Create a task</MDBNavLink>
                     </MDBNavItem>
                 </MDBNavbarNav>
                 <MDBNavbarNav right>
