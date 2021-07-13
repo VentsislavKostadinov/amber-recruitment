@@ -4,15 +4,22 @@ import './style/CreateTask.css';
 import fire from "../Firebase/context";
 import showNotification from "../notifications";
 
+  
+
 export default class CreateTask extends Component {
 
-    state = {
+constructor() {
+ 
+super()
+    this.state = {
         taskTitle: '',
         taskSubTitle: '',
         taskEstimate: '',
         taskDescription: ''
     }
 
+}
+  
     handleTaskTitle = (e) => {
 
         this.setState({
@@ -57,8 +64,9 @@ export default class CreateTask extends Component {
                 taskDescription
 
             }).then(res => {
-                console.log(res);
+                //console.log(res);
                 showNotification('Task added: ', taskTitle, taskSubTitle, taskEstimate, taskDescription);
+
 
             }).catch(err => {
                 console.log(err.message);
@@ -69,13 +77,27 @@ export default class CreateTask extends Component {
             requiredFields.style.color = 'red';
             requiredFields.textContent = 'All Fields Required';
         }
+
+        this.setState({taskTitle: ''})
+    }
+
+    onResetFunc = () => {
+
+        this.setState({
+            taskTitle: '',
+            taskSubTitle: '',
+            taskEstimate: '',
+            taskDescription: ''
+        })
     }
 
     enterPressed = (e) => {
         if (e.key === 'Enter') {
             this.handleSubmitJob(e);
         }
+
     }
+
 
     componentWillUnmount() {
 
@@ -84,26 +106,27 @@ export default class CreateTask extends Component {
 
     render() {
         return (
-            <MDBCol lg="6" id='create-job'>
-                <form>
+         <MDBCol lg="6" id='create-job'>
+                <form onSubmit={this.handleSubmitJob}>
                     <p className="h5 text-center mb-4">Create a task</p>
                     <div className="grey-text">
                         <MDBInput onChange={this.handleTaskTitle} label="Type a task title" group type="text"
                             id='task-title' validate error="wrong"
-                            success="right" />
+                            success="right"/>
                         <MDBInput onChange={this.handleTaskSubTitle} label="Type a task subtitle" group type="text"
                             id="task-subtitle" validate error="wrong" />
                         <MDBInput onChange={this.handleTaskEstimate} label="Estimate" group type="text"
                             id="task-estimate" validate error="wrong" />
-                        <MDBInput onChange={this.handleTaskDescription} label="Job details" group id='task-description'
+                        <MDBInput onChange={this.handleTaskDescription} label="Task details" group id='task-description'
                             type="textarea" rows="5" onKeyPress={this.enterPressed} />
                         <p id="create-task-required-fields" />
                     </div>
                     <div className="text-center">
-                        <MDBBtn onClick={this.handleSubmitJob}>Create</MDBBtn>
+                        <MDBBtn type="submit">Create</MDBBtn>
+                        
                     </div>
                 </form>
-            </MDBCol>
+        </MDBCol> 
         );
     };
 }
