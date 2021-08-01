@@ -128,27 +128,27 @@ export default class TaskList extends Component {
                                     <div>
                                         <MDBContainer id='modal-edit'>
                                             <MDBRow>
-                                                <MDBBtn color="green" onClick={() => this.findOutMore(job)} onClick={this.toggle}>Check</MDBBtn>
-
+                                                <MDBBtn color="info" onClick={() => this.findOutMore(job)} onClick={this.toggle}>Edit</MDBBtn>
+                                                <MDBBtn color="green" onClick={() => this.onDelete(job.doc.id)}>Complete</MDBBtn>
                                                 <MDBModal isOpen={this.state.showEditModal} toggle={this.toggle}><br />
                                                     <MDBModalHeader toggle={this.toggle}>Edit task</MDBModalHeader>
-                                                    <MDBCol lg="12" id='create-job'>
+                                                    <MDBCol lg="12" id='edit-task'>
                                                         <form>
-                                                            <p className="h5 text-center mb-4">Edit a task</p>
+                                                          
                                                             <div className="grey-text">
                                                                 <MDBInput  label="Type a task title" group type="text" value={job.taskTitle}
                                                                     id='task-title' validate error="wrong"
                                                                     success="right" />
-                                                                <MDBInput  label="Type a task subtitle" group type="text"
+                                                                <MDBInput  label="Type a task subtitle" group type="text" value={job.taskSubTitle}
                                                                     id="task-subtitle" validate error="wrong" />
-                                                                <MDBInput  label="Estimate" group type="text"
+                                                                <MDBInput  label="Estimate" group type="text" value={job.taskEstimate}
                                                                     id="task-estimate" validate error="wrong" />
-                                                                <MDBInput  label="Task details" group id='task-description'
+                                                                <MDBInput  label="Task details" group id='task-description' value={job.taskDescription}
                                                                     type="textarea" rows="5" />
                                                                 <p id="create-task-required-fields" />
                                                             </div>
                                                             <div className="text-center">
-                                                                <MDBBtn type="submit">Create</MDBBtn>
+                                                                <MDBBtn>Edit</MDBBtn>
 
                                                             </div>
                                                         </form>
@@ -158,7 +158,7 @@ export default class TaskList extends Component {
 
                                             </MDBRow>
                                         </MDBContainer>
-                                        <MDBBtn color="green" onClick={() => this.onDelete(job.doc.id)}>Complete</MDBBtn>
+                                        
                                     </div>
                                 ) : null}
 
