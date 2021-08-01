@@ -4,6 +4,7 @@ import Home from "./Home/Home";
 import CreateTask from "./CreateJob/CreateTask";
 import TaskList from './TaskList/TaskList';
 import NotFoundPage from "./NotFoundPage/NotFoundPage";
+import EditTask from './EditTask/EditTask';
 
 export default class Routes extends Component {
 
@@ -13,6 +14,7 @@ export default class Routes extends Component {
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path='/tasks/' component={TaskList}/>
+                    <Route path='/edit/' component={EditTask}/>
                     <Route path='/create-a-task/' component={CreateTask}/>
                     <Route component={NotFoundPage}/>
                 </Switch>

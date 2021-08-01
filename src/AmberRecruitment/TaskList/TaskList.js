@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
-import { MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBNavLink, MDBRow } from 'mdbreact';
+import React, { Component } from "react";
+import { MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBRow, MDBNavLink, MDBInput, MDBContainer, MDBModal, MDBModalHeader, MDBModalBody, MDBModalFooter } from "mdbreact";
+import EditTask from "../EditTask/EditTask";
 import fire from "../Firebase/context";
 import showNotification from "../notifications";
 
 export default class TaskList extends Component {
-
-
     constructor(props) {
         super(props);
-        this.ref = fire.firestore().collection('jobs');
+        this.ref = fire.firestore().collection("jobs");
         this.unsubscribe = null;
 
         this.state = {
             currentJobList: [],
             user: {},
-            clickedJob: []
-
-        }
+            clickedJob: '',
+            pushedData: [],
+            showEditModal: false
+        };
     }
 
     onCollectionUpdate = (querySnapshot) => {
         let currentJobList = [];
-        querySnapshot.forEach(doc => {
-            const { taskTitle, taskSubTitle, taskEstimate, taskDescription } = doc.data();
+        querySnapshot.forEach((doc) => {
+            const { taskTitle, taskSubTitle, taskEstimate, taskDescription } =
+                doc.data();
 
             currentJobList.push({
                 key: doc.id,
@@ -31,101 +32,142 @@ export default class TaskList extends Component {
                 taskSubTitle,
                 taskEstimate,
                 taskDescription,
-                checked: true
+                checked: true,
             });
-
         });
         this.setState({
-            currentJobList
+            currentJobList,
         });
-    }
+    };
     componentDidMount() {
         this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
         this.authListener();
     }
 
     componentWillMount() {
-       // this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+        // this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
         this.authListener();
     }
 
     authListener = () => {
-        fire.auth().onAuthStateChanged(user => {
+        fire.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.setState({ user });
 
                 // user.getIdTokenResult().then(idTokenResult => {
                 //     console.log(idTokenResult.claims.admin);
                 // })
-
             } else {
                 this.setState({ user: null });
             }
-        })
-    }
+        });
+    };
 
     onDelete = (id) => {
-        fire.firestore().collection('jobs').doc(id).delete()
+        fire
+            .firestore()
+            .collection("jobs")
+            .doc(id)
+            .delete()
             .then(() => {
-                console.log('Document successfully added!');
-                showNotification('Successfully deleted', '')
-
-            }).catch(error => {
-                console.log('Error removing ', error.message);
+                console.log("Document successfully added!");
+                showNotification("Successfully deleted", "");
             })
-    }
+            .catch((error) => {
+                console.log("Error removing ", error.message);
+            });
+    };
 
-    findOutMore = (clickedJob) => {
+    findOutMore = (clickedTask) => {
 
+        let clickedJob = this.state.clickedJob;
+        clickedJob = clickedTask
+        this.setState({ clickedJob: clickedJob });
         console.log(clickedJob);
-        this.setState({ clickedJob: clickedJob })
 
+        let pushedData = this.state.pushedData;
+        pushedData.push(clickedTask)
+        console.log(pushedData);
+
+
+    };
+
+    toggle = () => {
+        this.setState({ showEditModal: !this.state.showEditModal })
     }
 
-    handleChange = () => {
+    handleChange = (e) => {
+        console.log(e.target.value);
 
-        this.setState({checked: !this.state.checked})
-
-      
-    }
+        this.setState({ checked: !this.state.checked });
+        console.log(!this.state.checked);
+    };
 
     render() {
-
         return (
-
             <MDBRow className="d-flex justify-content-center">
                 <MDBCol lg="6" md="8" sm="10">
-                    {this.state.currentJobList.map(job =>
-                        <MDBCard key={job.key} style={{ margin: '20px' }} id={job.doc.id}>
+                    {this.state.currentJobList.map((job) => (
+                        <MDBCard key={job.key} style={{ margin: "20px" }} id={job.doc.id}>
                             <MDBCardBody>
+                                <MDBCardTitle>
+                                    <i className="fas fa-tasks"></i> {job.taskTitle}
+                                </MDBCardTitle>
+                                <MDBCardText>
+                                    <i className="fas fa-book-reader"></i>{" "}
+                                    <b>{job.taskSubTitle}</b>
+                                </MDBCardText>
+                                <MDBCardText>
+                                    <i className="fas fa-hourglass"></i> <b>{job.taskEstimate}</b>
+                                </MDBCardText>
+                                <MDBCardText>
+                                    <i className="fas fa-info-circle"></i> {job.taskDescription}
+                                </MDBCardText>
 
-                          {/*  <input type="checkbox" className="custom-control-input" id="defaultUnchecked"  onChange={this.handleChange}/>
-                                    <label className="custom-control-label" htmlFor="defaultUnchecked"></label>
-                            */}
-                                 
-                                  {/*  Delete */}
-                              {this.state.user ? (
-                                    <div><a href="/#" className="close" data-dismiss="alert" aria-label="close"
-                                        style={{ color: 'red' }} onClick={() => this.onDelete(job.doc.id)}>&times;</a>
-                             </div>) : null} 
+                                {this.state.user ? (
+                                    <div>
+                                        <MDBContainer id='modal-edit'>
+                                            <MDBRow>
+                                                <MDBBtn color="green" onClick={() => this.findOutMore(job)} onClick={this.toggle}>Check</MDBBtn>
 
-                                <MDBCardTitle><i className="fas fa-tasks"></i> {job.taskTitle}</MDBCardTitle>
+                                                <MDBModal isOpen={this.state.showEditModal} toggle={this.toggle}><br />
+                                                    <MDBModalHeader toggle={this.toggle}>Edit task</MDBModalHeader>
+                                                    <MDBCol lg="12" id='create-job'>
+                                                        <form>
+                                                            <p className="h5 text-center mb-4">Edit a task</p>
+                                                            <div className="grey-text">
+                                                                <MDBInput  label="Type a task title" group type="text" value={job.taskTitle}
+                                                                    id='task-title' validate error="wrong"
+                                                                    success="right" />
+                                                                <MDBInput  label="Type a task subtitle" group type="text"
+                                                                    id="task-subtitle" validate error="wrong" />
+                                                                <MDBInput  label="Estimate" group type="text"
+                                                                    id="task-estimate" validate error="wrong" />
+                                                                <MDBInput  label="Task details" group id='task-description'
+                                                                    type="textarea" rows="5" />
+                                                                <p id="create-task-required-fields" />
+                                                            </div>
+                                                            <div className="text-center">
+                                                                <MDBBtn type="submit">Create</MDBBtn>
 
-                                <MDBCardText><i className="fas fa-book-reader"></i> <b>{job.taskSubTitle}</b></MDBCardText>
-                                <MDBCardText><i className="fas fa-hourglass"></i> <b>{job.taskEstimate}</b></MDBCardText>
-                                <MDBCardText><i className="fas fa-info-circle"></i> {job.taskDescription}</MDBCardText>
-                                {/*<MDBNavLink to={`/job-description/${job.jobTitle}`}>
-                                    <MDBBtn color="elegant" onClick={() => this.findOutMore(job)}>Find out more</MDBBtn>
+                                                            </div>
+                                                        </form>
+                                                    </MDBCol>
+                                                </MDBModal>
 
-                                </MDBNavLink> */}
+
+                                            </MDBRow>
+                                        </MDBContainer>
+                                        <MDBBtn color="green" onClick={() => this.onDelete(job.doc.id)}>Complete</MDBBtn>
+                                    </div>
+                                ) : null}
 
                             </MDBCardBody>
                         </MDBCard>
-                    )}
+                    ))
+                    }
                 </MDBCol>
-
-            </MDBRow>
-
+            </MDBRow >
         );
     }
 }
