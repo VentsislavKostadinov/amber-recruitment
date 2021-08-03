@@ -131,6 +131,7 @@ export default class TaskList extends Component {
                                                 <MDBBtn color="info" onClick={() => this.findOutMore(job)} onClick={this.toggle}>Edit</MDBBtn>
                                                 <MDBBtn color="green" onClick={() => this.onDelete(job.doc.id)}>Complete</MDBBtn>
                                                 <MDBModal isOpen={this.state.showEditModal} toggle={this.toggle}><br />
+                                                
                                                     <MDBModalHeader toggle={this.toggle}>Edit task</MDBModalHeader>
                                                     <MDBCol lg="12" id='edit-task'>
                                                         <form>
